@@ -8,6 +8,7 @@ from pathlib import Path
 import os
 
 from src.extraction import TermExtractor
+from src.utils.constants import SUPPORTED_LANGUAGES
 
 
 def show_extraction_page():
@@ -29,14 +30,16 @@ def show_extraction_page():
         
         source_lang = st.selectbox(
             "Source Language",
-            options=["en", "de", "fr", "es", "it", "pt", "ja", "zh", "ru"],
-            index=0,
+            options=list(SUPPORTED_LANGUAGES.keys()),
+            format_func=lambda x: f"{x} - {SUPPORTED_LANGUAGES[x]}",
+            index=list(SUPPORTED_LANGUAGES.keys()).index('en'),
             help="Language of the document"
         )
         
         target_lang = st.selectbox(
             "Target Language",
-            options=["None", "de", "fr", "es", "it", "pt", "ja", "zh", "ru", "en"],
+            options=["None"] + list(SUPPORTED_LANGUAGES.keys()),
+            format_func=lambda x: f"{x} - {SUPPORTED_LANGUAGES[x]}" if x != "None" else "None",
             index=0,
             help="For bilingual extraction and translation"
         )
