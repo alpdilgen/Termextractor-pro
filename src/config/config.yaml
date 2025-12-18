@@ -1,0 +1,91 @@
+# TermExtractor-Pro Configuration
+# Default settings for term extraction
+
+app:
+  name: "TermExtractor-Pro"
+  version: "1.0.0"
+  description: "AI-powered terminology extraction with bilingual lookup and derivative discovery"
+
+extraction:
+  default_relevance_threshold: 70.0
+  default_confidence_threshold: 60.0
+  min_term_length: 2
+  max_term_length: 255
+  chunk_size: 2000
+  chunk_overlap: 100
+
+model_selection:
+  # Cost-optimized model selection
+  extraction_model: "claude-3-5-haiku-20241022"  # Fast, cheap for basic extraction
+  domain_classification_model: "claude-3-5-haiku-20241022"  # Fast domain detection
+  fuzzy_refinement_model: "claude-3-5-sonnet-20241022"  # Better for complex analysis
+  default_model: "claude-3-5-sonnet-20241022"  # Fallback
+
+api:
+  timeout_seconds: 60
+  rate_limit_per_minute: 50
+  max_tokens_per_request: 4096
+  retry_attempts: 3
+  retry_delay_seconds: 2
+
+translation_lookup:
+  enabled: false
+  fuzzy_matching_enabled: true
+  fuzzy_threshold: 70.0
+  exact_match_case_sensitive: false
+  supported_formats:
+    - xliff
+    - sdlxliff
+    - mqxliff
+    - xml
+
+derivative_discovery:
+  enabled: false
+  modes:
+    - prefix      # Search: term*
+    - suffix      # Search: *term
+    # - any       # Search: *term* (aggressive)
+  include_in_variants: true
+  min_variant_length: 3
+  max_variants_per_term: 20
+  case_sensitive: false
+
+export:
+  default_format: "xlsx"
+  include_statistics: true
+  include_derivatives_sheet: true
+  include_lookup_stats: true
+  csv_delimiter: ","
+  csv_encoding: "utf-8-sig"
+
+ui:
+  theme: "light"
+  sidebar_state: "expanded"
+  default_language: "en"
+  max_upload_size_mb: 100
+  session_timeout_minutes: 30
+
+performance:
+  batch_size: 5
+  max_parallel_requests: 3
+  enable_caching: false
+  cache_ttl_hours: 24
+
+languages:
+  default_source: "en"
+  default_target: null
+  supported: 
+    - en
+    - de
+    - fr
+    - es
+    - it
+    - pt
+    - bg
+    - ro
+    - tr
+    - ru
+    - ja
+    - zh
+    - ar
+    - hi
